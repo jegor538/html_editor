@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +13,9 @@
         }
 
         body {
-            background: #000;
-            color: #0f0;
-            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #ccc;
+            font-family: 'Courier New', 'Fira Code', monospace;
             height: 100vh;
             display: flex;
             flex-direction: column;
@@ -22,8 +23,8 @@
         }
 
         .toolbar {
-            border-bottom: 2px solid #0f0;
-            padding: 8px 12px;
+            background: #0a0a0a;
+            padding: 12px;
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
@@ -31,29 +32,28 @@
         }
 
         .toolbar button {
-            background: #000;
-            border: 1px solid #0f0;
-            color: #0f0;
+            background: #1a1a1a;
+            border: none;
+            color: #ccc;
             font-family: monospace;
-            font-size: 12px;
-            font-weight: bold;
-            padding: 6px 12px;
+            font-size: 13px;
+            font-weight: normal;
+            padding: 8px 16px;
             cursor: pointer;
         }
 
         .toolbar button:active {
-            background: #0f0;
-            color: #000;
+            background: #2a2a2a;
+            color: #fff;
         }
 
         .status {
-            font-size: 10px;
-            padding: 4px 12px;
-            background: #0f0;
-            color: #000;
-            border-bottom: 1px solid #0f0;
-            flex-shrink: 0;
+            background: #0a0a0a;
+            color: #888;
+            font-size: 11px;
+            padding: 8px 12px;
             font-family: monospace;
+            flex-shrink: 0;
         }
 
         .workspace {
@@ -67,7 +67,7 @@
             flex: 1;
             display: flex;
             flex-direction: column;
-            border-right: 2px solid #0f0;
+            background: #0a0a0a;
             min-width: 0;
         }
 
@@ -75,29 +75,27 @@
             flex: 1;
             display: flex;
             flex-direction: column;
+            background: #0a0a0a;
             min-width: 0;
-            background: #fff;
         }
 
         .pane-label {
-            padding: 6px 12px;
-            font-weight: bold;
-            font-size: 10px;
-            border-bottom: 1px solid #0f0;
-            background: #000;
-            color: #0f0;
-            flex-shrink: 0;
+            background: #0a0a0a;
+            color: #888;
+            padding: 8px 12px;
+            font-size: 11px;
+            font-family: monospace;
         }
 
         textarea {
             flex: 1;
-            background: #000;
-            color: #0f0;
+            background: #0a0a0a;
+            color: #ccc;
             font-family: 'Courier New', monospace;
             font-size: 13px;
-            line-height: 1.4;
+            line-height: 1.5;
             border: none;
-            padding: 10px;
+            padding: 12px;
             resize: none;
             outline: none;
             width: 100%;
@@ -107,7 +105,7 @@
             flex: 1;
             width: 100%;
             border: none;
-            background: white;
+            background: #0a0a0a;
         }
 
         @media (max-width: 640px) {
@@ -115,32 +113,35 @@
                 flex-direction: column;
             }
             .editor-pane {
-                border-right: none;
-                border-bottom: 2px solid #0f0;
                 min-height: 45%;
             }
             textarea {
                 font-size: 16px;
             }
         }
+
+        ::selection {
+            background: #2a2a2a;
+            color: #fff;
+        }
     </style>
 </head>
 <body>
 
 <div class="toolbar">
-    <button id="reset">RESET</button>
-    <button id="clear">CLEAR</button>
-    <button id="copy">COPY</button>
+    <button id="reset">reset</button>
+    <button id="clear">clear</button>
+    <button id="copy">copy</button>
 </div>
-<div class="status" id="status">● live editing</div>
+<div class="status" id="status">● live</div>
 
 <div class="workspace">
     <div class="editor-pane">
-        <div class="pane-label">[ CODE ]</div>
+        <div class="pane-label">code</div>
         <textarea id="code" spellcheck="false"></textarea>
     </div>
     <div class="preview-pane">
-        <div class="pane-label">[ PREVIEW ]</div>
+        <div class="pane-label">preview</div>
         <iframe id="preview" class="preview-frame"></iframe>
     </div>
 </div>
@@ -158,7 +159,7 @@
 <style>
 body {
     background: #0a0a0a;
-    color: #0f0;
+    color: #ccc;
     font-family: monospace;
     padding: 2rem;
     margin: 0;
@@ -168,30 +169,29 @@ body {
     min-height: 100vh;
 }
 .box {
-    border: 2px solid #0f0;
+    background: #0a0a0a;
     padding: 2rem;
     max-width: 90%;
     text-align: center;
 }
 button {
-    background: #000;
-    border: 1px solid #0f0;
-    color: #0f0;
+    background: #1a1a1a;
+    border: none;
+    color: #ccc;
     font-family: monospace;
     padding: 8px 16px;
     margin-top: 1rem;
     cursor: pointer;
 }
 button:active {
-    background: #0f0;
-    color: #000;
+    background: #2a2a2a;
 }
 input {
-    background: #000;
-    border: 1px solid #0f0;
-    color: #0f0;
+    background: #1a1a1a;
+    border: none;
+    color: #ccc;
     font-family: monospace;
-    padding: 6px;
+    padding: 8px;
     margin: 8px 0;
 }
 </style>
@@ -215,7 +215,7 @@ document.getElementById('input')?.addEventListener('input', (e) => {
     function updatePreview() {
         let html = code.value;
         if (!html.trim()) {
-            html = '<html><body style="background:#000;color:#0f0;font-family:monospace;padding:20px;">empty</body></html>';
+            html = '<html><body style="background:#0a0a0a;color:#ccc;font-family:monospace;padding:20px;">empty</body></html>';
         }
         
         const iframeDoc = preview.contentDocument || preview.contentWindow.document;
@@ -224,7 +224,7 @@ document.getElementById('input')?.addEventListener('input', (e) => {
         iframeDoc.close();
         
         const len = html.length;
-        status.innerHTML = `● updated ${new Date().toLocaleTimeString()} | ${len} chars`;
+        status.innerHTML = `● ${new Date().toLocaleTimeString()} | ${len}`;
     }
 
     let timer;
@@ -238,28 +238,30 @@ document.getElementById('input')?.addEventListener('input', (e) => {
     document.getElementById('reset').onclick = () => {
         code.value = defaultCode;
         updatePreview();
-        status.innerHTML = '● reset to default';
+        status.innerHTML = '● reset';
+        setTimeout(() => { status.innerHTML = '● live'; }, 1200);
     };
     
     document.getElementById('clear').onclick = () => {
         code.value = '';
         updatePreview();
         status.innerHTML = '● cleared';
+        setTimeout(() => { status.innerHTML = '● live'; }, 1200);
     };
     
     document.getElementById('copy').onclick = async () => {
         try {
             await navigator.clipboard.writeText(code.value);
             status.innerHTML = '● copied';
-            setTimeout(() => { status.innerHTML = '● live editing'; }, 1500);
+            setTimeout(() => { status.innerHTML = '● live'; }, 1200);
         } catch(e) {
             code.select();
             document.execCommand('copy');
-            status.innerHTML = '● copied (fallback)';
+            status.innerHTML = '● copied';
+            setTimeout(() => { status.innerHTML = '● live'; }, 1200);
         }
     };
     
-    // load saved or default
     const saved = localStorage.getItem('brutal_code');
     if (saved && saved.length > 20) {
         code.value = saved;
@@ -268,7 +270,6 @@ document.getElementById('input')?.addEventListener('input', (e) => {
     }
     updatePreview();
     
-    // autosave
     let saveTimer;
     code.addEventListener('input', () => {
         clearTimeout(saveTimer);
